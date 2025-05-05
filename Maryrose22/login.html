@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+
+
+  </body>
+  
+        <div class="imgcontainer">
+          <img src="rosepic.jpg" alt="Avatar" class="avatar">
+         </div>
+      
+        <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input type="text" id="username" placeholder="Enter Username" name="uname" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" id="password"  placeholder="Enter Password" name="psw" required>
+              
+          <button id="submit" type="submit">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
+      
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    
+</body>
+</html>
+
+<script>
+
+  let checkifLogin = sessionStorage.getItem("username");
+  if(checkifLogin){
+    alert("Please Logout First");
+    window.location = "Act.html";
+  }
+
+    let users = [
+      {
+        id       : 1, 
+        username : "Maryrose",
+        password : "12345",
+        fullname : "Maryrose Planga"
+      },
+      {
+        id       : 2, 
+        username : "Mark",
+        password : "12345678",
+        fullname : "Mark Lastimosa"
+      }
+    ];
+
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    let  submit = document.getElementById("submit");
+    submit.addEventListener("click",function(){
+
+      if(checkLogin(username.value,password.value) == true){
+          sessionStorage.setItem("username",username.value);
+          window.location = "Act.html";
+      }else{
+        alert("Invalid Credentials!");
+      }
+        
+    });
+
+    
+    function checkLogin(username,password){
+      let UserExist = false;
+      for(let i=0; i < users.length; i++){
+          if(username == users[i].username && password == users[i].password ){
+              UserExist = true;
+              break;
+          }
+      }
+      return UserExist;
+    }
+
+</script>

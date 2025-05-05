@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<head lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+    .btn-alignment{
+        margin: 50px;
+        font-size: 15px;
+        background-color:darkseagreen;
+        border-radius: 10px;
+        padding: 20px;
+        cursor: pointer;
+        position: center;
+        margin-left: 60px;
+    }
+    .back{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color:#0056b3;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 1em;
+    width: 120px;
+    text-align: center;
+    border-radius: 4px;
+}
+    #num1{
+        margin-top: 60px;
+        padding: 10px;
+        width: 300px;
+    }
+    #num2{
+        padding: 10px;
+        width: 300px;
+    }
+
+    body{
+        background-color: pink;
+        color:rgb(0, 0, 0);
+        padding: 20px 20px;
+        margin: 100px 250px;
+        box-sizing: content-box;
+        width: 60%;
+        background-image: url('greenF.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+    }
+    
+    button{
+        background-color:coral;
+        color: black;
+        padding: 10px 20px;
+        margin: 8% 0;
+        border: none;
+        cursor: pointer;
+        width: 100px;
+        
+    }
+    #num1,#cars{
+        margin-bottom: 10px;
+    }
+    #num1{
+        margin-top: 20px;
+    }
+    #cars{
+        padding: 10px;
+        width: 60px;
+
+    }
+    .calculate{
+     margin-top: 2px;
+
+    }
+    .dark-mode {
+            background-color: #333;
+            color: #f5f5f5;
+        }
+
+        .dark-mode .container {
+            background-color: #444;
+        }
+
+        .dark-mode input, .dark-mode select, .dark-mode button {
+            background-color: #555;
+            color: #f5f5f5;
+            border: 1px solid #777;
+        }
+
+        .dark-mode button {
+            background-color: #888;
+            color: white;
+        }
+
+        .dark-mode button:hover {
+            background-color: #999;
+        }
+
+        
+        .dark-mode-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .dark-mode-switch input {
+            display: none;
+        }
+
+        .dark-mode-switch label {
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            display: block;
+            border-radius: 30px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode-switch label::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .dark-mode-switch input:checked + label {
+            background-color: #4CAF50;
+        }
+
+        .dark-mode-switch input:checked + label::after {
+            transform: translateX(30px);
+        }
+
+</style>
+</head>
+    <body>
+        <div class="dark-mode-switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <label for="dark-mode-toggle"></label>
+        </div>
+    
+        <div class="btn-alignment"> 
+            <div class="mini">
+            <center><input type="number" id="num1" placeholder="Enter first number">
+                <br>
+            <select name="operation" id="cars"></center>
+            <option value="sum">+</option>
+            <option value="diff">-</option>
+            <option value="prod">*</option>
+            <option value="div">/</option>
+        </select>
+        <br></div>
+        <center><input type="number" id="num2" placeholder="Enter second number">
+            <br>
+            <button id="calculate">Calculate</button>   
+        <h1 id="display_output">The result will be displayed here</h1></center>
+    </div>
+       
+    
+        <script>
+        const toggleSwitch = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        toggleSwitch.addEventListener('change', function() {
+            if (toggleSwitch.checked) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+        });
+
+            // Get references to the HTML elements
+            let calculate = document.getElementById("calculate");
+            let num1 = document.getElementById("num1");
+            let num2 = document.getElementById("num2");
+            let operation = document.getElementById("cars");
+            let display_output = document.getElementById("display_output");
+    
+            calculate.addEventListener("click", function() {
+                // Parse the input values as floating-point numbers
+                let value1 = parseFloat(num1.value);
+                let value2 = parseFloat(num2.value);
+                let operator = operation.value;
+                let result;
+    
+                // Simple validation to check if both inputs are numbers
+                if (isNaN(value1) || isNaN(value2)) {
+                    display_output.textContent = 'Please enter valid numbers in both fields.';
+                    return;
+                }
+    
+                // Perform the calculation based on the selected operator
+                switch (operator) {
+                    case 'sum':  
+                        result = value1 + value2;
+                        break;
+                    case 'diff':
+                        result = value1 - value2;
+                        break;
+                    case 'prod':
+                        result = value1 * value2;
+                        break;
+                    case 'div':
+                        if (value2 === 0) {
+                            display_output.textContent = 'Cannot divide by zero.';
+                            return;
+                        }
+                        result = value1 / value2;
+                        break;
+                    default:
+                        display_output.textContent = 'Invalid operation.';
+                        return;
+                }
+    
+                // Display the result
+                display_output.textContent = `The result is ${result}`;
+            });
+        </script>
+   
+   <a href="Act.html" class="back">Back</a>
